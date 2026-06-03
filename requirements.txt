@@ -2,3 +2,4 @@ streamlit
 requests
 laspy
 numpy
+lazrs
