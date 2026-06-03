@@ -3,6 +3,7 @@ import tempfile
 import requests
 import laspy
 import numpy as np
+import streamlit as st
 
 API_KEY = "413575e5-3b76-4f15-94fe-a46304de7e2a"
 
@@ -51,6 +52,7 @@ def start_job():
 
     job_url = data["links"][0]["href"]
     print("Job käynnistetty:", job_url)
+    st.write("Job käynnistetty:")
 
     return job_url
 
@@ -62,6 +64,7 @@ def poll_job(job_url):
         data = r.json()
 
         print("Status:", data["status"], "Progress:", data.get("progress"))
+        st.write("Status:")
 
         if data["status"] in ["successful", "succeeded", "finished"]:
             return job_url  # palauta URL, ei dataa vielä
@@ -133,6 +136,7 @@ def main():
     print()
     print("Valmis")
     print(f"{MAP_SHEET}: keskimääräinen korkeus = {mean_height:.2f} m")
+    st.write(f"{MAP_SHEET}: keskimääräinen korkeus = {mean_height:.2f} m")
 
 
 if __name__ == "__main__":
